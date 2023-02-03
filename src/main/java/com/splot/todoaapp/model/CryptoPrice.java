@@ -10,9 +10,9 @@ public class CryptoPrice {
     @Id
     private String id;
     @Field
-    private String firstCryptocurrency;
+    private String cryptoCurrency;
     @Field
-    private String secondCryptocurrency;
+    private String regularCurrency;
     @Field
     private Double price;
     @Field
@@ -26,20 +26,20 @@ public class CryptoPrice {
         this.id = id;
     }
 
-    public String getFirstCryptocurrency() {
-        return firstCryptocurrency;
+    public String getCryptoCurrency() {
+        return cryptoCurrency;
     }
 
-    public void setFirstCryptocurrency(String firstCryptocurrency) {
-        this.firstCryptocurrency = firstCryptocurrency;
+    public void setCryptoCurrency(String cryptoCurrency) {
+        this.cryptoCurrency = cryptoCurrency;
     }
 
-    public String getSecondCryptocurrency() {
-        return secondCryptocurrency;
+    public String getRegularCurrency() {
+        return regularCurrency;
     }
 
-    public void setSecondCryptocurrency(String secondCryptocurrency) {
-        this.secondCryptocurrency = secondCryptocurrency;
+    public void setRegularCurrency(String regularCurrency) {
+        this.regularCurrency = regularCurrency;
     }
 
     public Double getPrice() {
@@ -62,8 +62,8 @@ public class CryptoPrice {
     public String toString() {
         return "CryptoPrice{" +
                 "id='" + id + '\'' +
-                ", curr1='" + firstCryptocurrency + '\'' +
-                ", curr2='" + secondCryptocurrency + '\'' +
+                ", curr1='" + cryptoCurrency + '\'' +
+                ", curr2='" + regularCurrency + '\'' +
                 ", price=" + price +
                 ", createdAt=" + createdAt +
                 '}';

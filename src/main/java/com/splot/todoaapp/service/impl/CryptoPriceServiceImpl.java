@@ -6,6 +6,7 @@ import com.splot.todoaapp.model.CryptoPrice;
 import com.splot.todoaapp.repository.CryptoPriceRepository;
 import com.splot.todoaapp.service.CryptoPriceService;
 import com.splot.todoaapp.service.HttpClient;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -32,24 +33,24 @@ public class CryptoPriceServiceImpl implements CryptoPriceService {
         ApiResponseDto ethDto = httpClient
                 .get("https://cex.io/api/last_price/ETH/USD", ApiResponseDto.class);
         ApiResponseDto xprDto = httpClient
-                .get("https://cex.io/api/last_price/XPR/USD", ApiResponseDto.class);
+                .get("https://cex.io/api/last_price/XRP/USD", ApiResponseDto.class);
         List<ApiResponseDto> dtosToSave = List.of(btcDto, ethDto, xprDto);
         saveDtosToDB(dtosToSave);
     }
 
     @Override
     public CryptoPrice getLowestPriceByCryptocurrency(String cryptocurrency) {
-        return repository.findFirstByFirstCryptocurrencyOrderByPriceAsc(cryptocurrency);
+        return repository.findFirstByCryptoCurrencyOrderByPriceAsc(cryptocurrency);
     }
 
     @Override
     public CryptoPrice getHighestPriceByCryptocurrency(String cryptocurrency) {
-        return repository.findFirstByFirstCryptocurrencyOrderByPriceDesc(cryptocurrency);
+        return repository.findFirstByCryptoCurrencyOrderByPriceDesc(cryptocurrency);
     }
 
     @Override
-    public List<CryptoPrice> getAllPriceByName(String curr) {
-        return null;
+    public List<CryptoPrice> getAllPriceByName(String cryptocurrency, PageRequest pageRequest) {
+        return repository.findAllByCryptoCurrency(cryptocurrency, pageRequest);
     }
 
     private void saveDtosToDB(List<ApiResponseDto> apiResponseDtos) {
