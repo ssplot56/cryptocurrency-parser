@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ApiResponseDto {
-    private Double lastPrice;
     private String curr1;
     private String curr2;
+    private Double lprice;
 }

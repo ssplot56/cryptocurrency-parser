@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 public class CryptoPriceMapper {
     public CryptoPrice parseApiResponseDto(ApiResponseDto dto) {
         CryptoPrice cryptoPrice = new CryptoPrice();
-        cryptoPrice.setCurr1(dto.getCurr1());
-        cryptoPrice.setCurr2(dto.getCurr2());
-        cryptoPrice.setPrice(dto.getLastPrice());
+        cryptoPrice.setFirstCryptocurrency(dto.getCurr1());
+        cryptoPrice.setSecondCryptocurrency(dto.getCurr2());
+        cryptoPrice.setPrice(dto.getLprice());
         cryptoPrice.setCreatedAt(LocalDateTime.now());
         return  cryptoPrice;
     }
 
     public CryptoPriceResponseDto toResponseDto(CryptoPrice cryptoPrice) {
         CryptoPriceResponseDto dto = new CryptoPriceResponseDto();
-        dto.setCurr1(cryptoPrice.getCurr1());
-        dto.setCurr2(cryptoPrice.getCurr2());
+        dto.setCurr1(cryptoPrice.getFirstCryptocurrency());
+        dto.setCurr2(cryptoPrice.getSecondCryptocurrency());
         dto.setPrice(cryptoPrice.getPrice());
         return dto;
     }

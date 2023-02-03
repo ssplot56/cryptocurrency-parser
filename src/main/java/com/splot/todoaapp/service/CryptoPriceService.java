@@ -6,11 +6,9 @@ import java.util.List;
 public interface CryptoPriceService {
     void addCurrentCryptoPrices();
 
-    CryptoPrice getLastBtcPrice();
+    CryptoPrice getLowestPriceByCryptocurrency(String cryptocurrency);
 
-    CryptoPrice getLastEthPrice();
-
-    CryptoPrice getLastXprPrice();
+    CryptoPrice getHighestPriceByCryptocurrency(String cryptocurrency);
 
     List<CryptoPrice> getAllPriceByName(String curr);
 }

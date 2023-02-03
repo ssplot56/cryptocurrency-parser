@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CryptoPriceRepository extends MongoRepository<CryptoPrice, Long> {
+    CryptoPrice findFirstByFirstCryptocurrencyOrderByPriceAsc(String curr1);
+
+    CryptoPrice findFirstByFirstCryptocurrencyOrderByPriceDesc(String curr1);
 }

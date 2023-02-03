@@ -2,39 +2,44 @@ package com.splot.todoaapp.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDateTime;
 
 @Document
 public class CryptoPrice {
     @Id
-    private Long id;
-    private String curr1;
-    private String curr2;
+    private String id;
+    @Field
+    private String firstCryptocurrency;
+    @Field
+    private String secondCryptocurrency;
+    @Field
     private Double price;
+    @Field
     private LocalDateTime createdAt;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getCurr1() {
-        return curr1;
+    public String getFirstCryptocurrency() {
+        return firstCryptocurrency;
     }
 
-    public void setCurr1(String curr1) {
-        this.curr1 = curr1;
+    public void setFirstCryptocurrency(String firstCryptocurrency) {
+        this.firstCryptocurrency = firstCryptocurrency;
     }
 
-    public String getCurr2() {
-        return curr2;
+    public String getSecondCryptocurrency() {
+        return secondCryptocurrency;
     }
 
-    public void setCurr2(String curr2) {
-        this.curr2 = curr2;
+    public void setSecondCryptocurrency(String secondCryptocurrency) {
+        this.secondCryptocurrency = secondCryptocurrency;
     }
 
     public Double getPrice() {
@@ -51,5 +56,16 @@ public class CryptoPrice {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "CryptoPrice{" +
+                "id='" + id + '\'' +
+                ", curr1='" + firstCryptocurrency + '\'' +
+                ", curr2='" + secondCryptocurrency + '\'' +
+                ", price=" + price +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

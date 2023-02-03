@@ -6,6 +6,7 @@ import com.splot.todoaapp.model.CryptoPrice;
 import com.splot.todoaapp.repository.CryptoPriceRepository;
 import com.splot.todoaapp.service.CryptoPriceService;
 import com.splot.todoaapp.service.HttpClient;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class CryptoPriceServiceImpl implements CryptoPriceService {
         this.mapper = mapper;
     }
 
+    @Scheduled(fixedDelay = 10000)
     @Override
     public void addCurrentCryptoPrices() {
         ApiResponseDto btcDto = httpClient
@@ -36,18 +38,13 @@ public class CryptoPriceServiceImpl implements CryptoPriceService {
     }
 
     @Override
-    public CryptoPrice getLastBtcPrice() {
-        return null;
+    public CryptoPrice getLowestPriceByCryptocurrency(String cryptocurrency) {
+        return repository.findFirstByFirstCryptocurrencyOrderByPriceAsc(cryptocurrency);
     }
 
     @Override
-    public CryptoPrice getLastEthPrice() {
-        return null;
-    }
-
-    @Override
-    public CryptoPrice getLastXprPrice() {
-        return null;
+    public CryptoPrice getHighestPriceByCryptocurrency(String cryptocurrency) {
+        return repository.findFirstByFirstCryptocurrencyOrderByPriceDesc(cryptocurrency);
     }
 
     @Override
