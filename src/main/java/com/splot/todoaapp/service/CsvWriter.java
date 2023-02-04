@@ -13,6 +13,9 @@ public class CsvWriter {
     private final static String BITCOIN = "BTC";
     private final static String ETHEREUM = "ETH";
     private final static String RIPPLE = "XRP";
+    private final static DateTimeFormatter DTF
+            = DateTimeFormatter.ofPattern("dd-MM-yy_HH-mm-ss");
+
     private final CryptoPriceService service;
 
     public CsvWriter(CryptoPriceService service) {
@@ -20,8 +23,7 @@ public class CsvWriter {
     }
 
     public void createCSVReport() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yy_HH-mm-ss");
-        String fileName = "report\\report_" + dtf.format(LocalDateTime.now()) + ".csv";
+        String fileName = "report\\report_" + DTF.format(LocalDateTime.now()) + ".csv";
         try (FileWriter out = new FileWriter(fileName);
              CSVPrinter printer = new CSVPrinter(out,
                 CSVFormat.DEFAULT.withHeader("Cryptocurrency Name", "Min Price", "Max Price"))) {

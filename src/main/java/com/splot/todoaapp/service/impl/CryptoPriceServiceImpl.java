@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CryptoPriceServiceImpl implements CryptoPriceService {
@@ -40,17 +41,26 @@ public class CryptoPriceServiceImpl implements CryptoPriceService {
 
     @Override
     public CryptoPrice getLowestPriceByCryptocurrency(String cryptocurrency) {
-        return repository.findFirstByCryptoCurrencyOrderByPriceAsc(cryptocurrency);
+        return Optional.ofNullable(
+                repository.findFirstByCryptoCurrencyOrderByPriceAsc(cryptocurrency)).orElseThrow(
+                () -> new RuntimeException(cryptocurrency + " is not available. Use only BTC, ETH, XRP")
+        );
     }
 
     @Override
     public CryptoPrice getHighestPriceByCryptocurrency(String cryptocurrency) {
-        return repository.findFirstByCryptoCurrencyOrderByPriceDesc(cryptocurrency);
+        return Optional.ofNullable(
+                repository.findFirstByCryptoCurrencyOrderByPriceDesc(cryptocurrency)).orElseThrow(
+                () -> new RuntimeException(cryptocurrency + " is not available. Use only BTC, ETH, XRP")
+        );
     }
 
     @Override
     public List<CryptoPrice> getAllPriceByName(String cryptocurrency, PageRequest pageRequest) {
-        return repository.findAllByCryptoCurrency(cryptocurrency, pageRequest);
+        return Optional.ofNullable(
+                repository.findAllByCryptoCurrency(cryptocurrency, pageRequest)).orElseThrow(
+                () -> new RuntimeException(cryptocurrency + " is not available. Use only BTC, ETH, XRP")
+        );
     }
 
     private void saveDtosToDB(List<ApiResponseDto> apiResponseDtos) {
